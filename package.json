@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/mohanad-ali-dev/Development#readme",
   "dependencies": {
-    "@capacitor/android": "^8.5.2"
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/cli": "^8.5.2"
   }
 }
