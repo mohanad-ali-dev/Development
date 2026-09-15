@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#10B981">
+    <meta name="description" content="تطبيق تطور لإدارة رحلة التطور والمهام والمصروفات">
+
+    <title>تطور</title>
+
+    
+    <!-- SheetJS (Excel) — محلي -->
+    <script src="../Js/xlsx.full.min.js"></script>
+   
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../Assets/Icon/css/all.min.css">
+
+    <!-- Main Style -->
+    <link rel="stylesheet" href="../Css/style.css">
+</head>
+
+<body>
+
+    <div id="app">
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="top-bar">
+
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+                </div>
+
+                <h1>تطور</h1>
+            </div>
+
+            <button
+                class="menu-button"
+                id="menuButton"
+                type="button"
+                aria-label="فتح القائمة">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </header>
+
+
+        <!-- ================= SIDE MENU ================= -->
+
+        <aside class="side-menu" id="sideMenu">
+
+            <div class="side-menu-header">
+
+                <div class="brand">
+                    <div class="brand-icon">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                    </div>
+
+                    <h2>تطور</h2>
+                </div>
+
+                <button
+                    class="close-menu"
+                    id="closeMenuButton"
+                    type="button"
+                    aria-label="إغلاق القائمة">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+            <nav class="side-navigation">
+
+                <button class="menu-item" data-action="reports">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>التقارير السابقة</span>
+                </button>
+
+                <button class="menu-item" data-action="theme">
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+                    <span>المظهر</span>
+                </button>
+
+                <button class="menu-item" data-action="about">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>عن تطور</span>
+                </button>
+
+            </nav>
+
+        </aside>
+
+        <div class="menu-overlay" id="menuOverlay"></div>
+
+
+        <!-- ================= MAIN ================= -->
+
+        <main class="main-content">
+
+
+            <!-- ================================================= -->
+            <!-- HOME -->
+            <!-- ================================================= -->
+
+            <section
+                class="page active"
+                id="homePage"
+                data-page="home">
+
+
+                <div class="page-heading">
+
+                    <div>
+                        <span class="eyebrow">
+                            رحلتك تبدأ من هنا
+                        </span>
+
+                        <h2>
+                            رحلة التطور الحالية
+                        </h2>
+                    </div>
+
+                </div>
+
+
+                <!-- JOURNEY CARD -->
+
+                <article class="journey-card">
+
+                    <div class="journey-header">
+
+                        <div>
+
+                            <span class="card-label">
+                                الرحلة الحالية
+                            </span>
+
+                            <h3 id="homeJourneyName">
+                                لا توجد رحلة حالية
+                            </h3>
+
+                        </div>
+
+
+                        <div class="journey-icon">
+                            <i class="fa-solid fa-route"></i>
+                        </div>
+
+                    </div>
+
+
+                    <div class="journey-day" id="homeJourneyDay">
+                        اليوم 0 من 0
+                    </div>
+
+
+                    <div class="progress-section">
+
+                        <div class="progress-header">
+
+                            <span>
+                                التقدم
+                            </span>
+
+                            <strong id="homeJourneyProgress">
+                                0%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+
+                            <div
+                                class="progress-value"
+                                id="homeJourneyProgressBar">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="journey-stats">
+
+                        <div class="journey-stat">
+
+                            <strong id="homeTotalTasks">
+                                0
+                            </strong>
+
+                            <span>
+                                المهام
+                            </span>
+
+                        </div>
+
+
+                        <div class="stat-divider"></div>
+
+
+                        <div class="journey-stat">
+
+                            <strong id="homeCompletedTasks">
+                                0
+                            </strong>
+
+                            <span>
+                                مكتملة
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- QUICK STATS -->
+
+                <div class="quick-stats">
+
+
+                    <button
+                        class="quick-stat"
+                        type="button"
+                        data-go-to="tasks">
+
+                        <div class="quick-stat-icon">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+
+                        <div>
+
+                            <span>
+                                المهام
+                            </span>
+
+                            <strong id="homeTasksCount">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </button>
+
+
+                    <button
+                        class="quick-stat"
+                        type="button"
+                        data-go-to="tasks">
+
+                        <div class="quick-stat-icon">
+                            <i class="fa-solid fa-chart-simple"></i>
+                        </div>
+
+                        <div>
+
+                            <span>
+                                الإنجاز
+                            </span>
+
+                            <strong id="homeTasksProgress">
+                                0%
+                            </strong>
+
+                        </div>
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- TODAY TASKS -->
+
+                <section class="content-section">
+
+                    <div class="section-heading">
+
+                        <h3>
+                            مهام اليوم
+                        </h3>
+
+                        <button
+                            class="view-all"
+                            type="button"
+                            data-go-to="tasks">
+
+                            عرض الكل
+
+                            <i class="fa-solid fa-arrow-left"></i>
+
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="task-preview-list"
+                        id="homeTodayTasks">
+
+                        <div class="empty-state">
+
+                            <div class="empty-icon">
+                                <i class="fa-solid fa-list-check"></i>
+                            </div>
+
+                            <p>
+                                لا توجد مهام حالياً
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- TODAY EXPENSE -->
+
+                <button
+                    class="expense-summary"
+                    type="button"
+                    data-go-to="expenses">
+
+                    <div class="expense-icon">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+
+                    <div class="expense-info">
+
+                        <span>
+                            مصروف اليوم
+                        </span>
+
+                        <strong id="homeTodayExpenses">
+                            0 جنيه
+                        </strong>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-left"></i>
+
+                </button>
+
+
+            </section>
+
+
+            <!-- ================================================= -->
+            <!-- TASKS (with Tabs) -->
+            <!-- ================================================= -->
+
+            <section
+                class="page"
+                id="tasksPage"
+                data-page="tasks">
+
+
+                <div class="page-heading with-action">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            إنجازاتك اليومية
+                        </span>
+
+                        <h2>
+                            المهام
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        class="add-button"
+                        id="addMainButton"
+                        type="button"
+                        aria-label="إضافة">
+
+                        <i class="fa-solid fa-plus"></i>
+
+                    </button>
+
+                </div>
+
+
+                <!-- TABS -->
+
+                <div class="tabs-switcher" role="tablist">
+
+                    <button
+                        class="tab-button active"
+                        type="button"
+                        data-tab="tasks"
+                        role="tab">
+
+                        <i class="fa-solid fa-list-check"></i>
+
+                        المهام
+
+                    </button>
+
+
+                    <button
+                        class="tab-button"
+                        type="button"
+                        data-tab="journeys"
+                        role="tab">
+
+                        <i class="fa-solid fa-route"></i>
+
+                        الرحلات
+
+                    </button>
+
+                </div>
+
+
+                <!-- ============ TAB: TASKS ============ -->
+
+                <div class="tab-content active" data-tab-content="tasks">
+
+
+                    <div class="section-heading">
+
+                        <h3>
+                            كل المهام
+                        </h3>
+
+                        <span
+                            class="count-badge"
+                            id="tasksCountBadge">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="tasks-list"
+                        id="tasksList">
+
+                        <div class="empty-state">
+
+                            <div class="empty-icon">
+                                <i class="fa-solid fa-list-check"></i>
+                            </div>
+
+                            <h3>
+                                لا توجد مهام
+                            </h3>
+
+                            <p>
+                                أضف مهمتك الأولى وابدأ الإنجاز
+                            </p>
+
+                            <button
+                                class="primary-button"
+                                id="emptyAddTaskButton"
+                                type="button">
+
+                                <i class="fa-solid fa-plus"></i>
+
+                                إضافة مهمة
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <article class="progress-card">
+
+                        <div class="progress-header">
+
+                            <h3>
+                                الإنجاز
+                            </h3>
+
+                            <strong id="tasksProgressPercent">
+                                0%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress-bar large">
+
+                            <div
+                                class="progress-value"
+                                id="tasksProgressBar">
+                            </div>
+
+                        </div>
+
+
+                        <p id="tasksProgressText">
+                            0 من 0 مهام مكتملة
+                        </p>
+
+                    </article>
+
+                </div>
+
+
+                <!-- ============ TAB: JOURNEYS ============ -->
+
+                <div class="tab-content" data-tab-content="journeys">
+
+
+                    <div class="section-heading">
+
+                        <h3>
+                            الرحلات
+                        </h3>
+
+                        <span
+                            class="count-badge"
+                            id="journeysCountBadge">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="journeys-list"
+                        id="journeysList">
+
+                        <div class="empty-state">
+
+                            <div class="empty-icon">
+                                <i class="fa-solid fa-route"></i>
+                            </div>
+
+                            <h3>
+                                لا توجد رحلات
+                            </h3>
+
+                            <p>
+                                ابدأ رحلتك الأولى الآن
+                            </p>
+
+                            <button
+                                class="primary-button"
+                                id="emptyAddJourneyButton"
+                                type="button">
+
+                                <i class="fa-solid fa-plus"></i>
+
+                                إضافة رحلة
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- ================================================= -->
+            <!-- EXPENSES -->
+            <!-- ================================================= -->
+
+            <section
+                class="page"
+                id="expensesPage"
+                data-page="expenses">
+
+
+                <div class="page-heading with-action">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            تابع إنفاقك بوضوح
+                        </span>
+
+                        <h2>
+                            المصروفات
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        class="add-button"
+                        id="addExpenseButton"
+                        type="button"
+                        aria-label="إضافة مصروف">
+
+                        <i class="fa-solid fa-plus"></i>
+
+                    </button>
+
+                </div>
+
+
+                <section class="content-section">
+
+                    <h3 class="section-title">
+                        إجمالي مصروفات اليوم
+                    </h3>
+
+
+                    <article class="total-expense-card">
+
+                        <span>
+                            إجمالي اليوم
+                        </span>
+
+                        <strong id="todayExpensesTotal">
+                            0
+                        </strong>
+
+                        <small>
+                            جنيه
+                        </small>
+
+                    </article>
+
+                </section>
+
+
+                <section class="content-section">
+
+                    <div class="section-heading">
+
+                        <h3>
+                            مصروفات اليوم
+                        </h3>
+
+                        <span
+                            class="count-badge"
+                            id="expensesCountBadge">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="expenses-list"
+                        id="expensesList">
+
+                        <div class="empty-state">
+
+                            <div class="empty-icon">
+                                <i class="fa-solid fa-receipt"></i>
+                            </div>
+
+                            <p>
+                                لا توجد مصروفات اليوم
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <section class="content-section">
+
+                    <h3 class="section-title">
+                        الفترة
+                    </h3>
+
+
+                    <div
+                        class="period-switcher"
+                        role="tablist">
+
+                        <button
+                            class="period-button active"
+                            type="button"
+                            data-period="day"
+                            role="tab">
+
+                            اليوم
+
+                        </button>
+
+
+                        <button
+                            class="period-button"
+                            type="button"
+                            data-period="week"
+                            role="tab">
+
+                            الأسبوع
+
+                        </button>
+
+
+                        <button
+                            class="period-button"
+                            type="button"
+                            data-period="month"
+                            role="tab">
+
+                            الشهر
+
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <article class="statistics-card">
+
+                    <div class="statistics-header">
+
+                        <div class="statistics-icon">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </div>
+
+                        <h3>
+                            الإحصائيات
+                        </h3>
+
+                    </div>
+
+
+                    <div class="statistics-row">
+
+                        <span>
+                            إجمالي الفترة
+                        </span>
+
+                        <strong id="periodTotal">
+                            0 جنيه
+                        </strong>
+
+                    </div>
+
+
+                    <div class="statistics-row">
+
+                        <span>
+                            متوسط اليوم
+                        </span>
+
+                        <strong id="periodAverage">
+                            0 جنيه
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <button
+                    class="export-button"
+                    id="exportExpensesButton"
+                    type="button">
+
+                    <i class="fa-solid fa-file-excel"></i>
+
+                    <span>
+                        تصدير المصروفات Excel
+                    </span>
+
+                </button>
+
+
+            </section>
+
+        </main>
+
+
+        <!-- ================================================= -->
+        <!-- BOTTOM NAVIGATION -->
+        <!-- ================================================= -->
+
+        <nav class="bottom-navigation">
+
+            <button
+                class="nav-item active"
+                type="button"
+                data-page-target="home">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>
+                    الرئيسية
+                </span>
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page-target="tasks">
+
+                <i class="fa-solid fa-list-check"></i>
+
+                <span>
+                    المهام
+                </span>
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                data-page-target="expenses">
+
+                <i class="fa-solid fa-wallet"></i>
+
+                <span>
+                    المصروفات
+                </span>
+
+            </button>
+
+        </nav>
+
+
+        <!-- ================================================= -->
+        <!-- CHOOSE TYPE MODAL -->
+        <!-- ================================================= -->
+
+        <div
+            class="modal"
+            id="chooseTypeModal"
+            aria-hidden="true">
+
+            <div
+                class="modal-overlay"
+                data-close-modal="chooseTypeModal">
+            </div>
+
+
+            <div class="modal-content small">
+
+                <div class="modal-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            اختار النوع
+                        </span>
+
+                        <h2>
+                            إضافة جديدة
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        class="modal-close"
+                        type="button"
+                        data-close-modal="chooseTypeModal">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+                </div>
+
+
+                <div class="choose-type-options">
+
+                    <button
+                        class="choose-type-card"
+                        id="chooseTask"
+                        type="button">
+
+                        <div class="choose-icon task-icon">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+
+                        <div class="choose-info">
+
+                            <strong>
+                                مهمة جديدة
+                            </strong>
+
+                            <span>
+                                مهمة يومية أو مؤقتة
+                            </span>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-left"></i>
+
+                    </button>
+
+
+                    <button
+                        class="choose-type-card"
+                        id="chooseJourney"
+                        type="button">
+
+                        <div class="choose-icon journey-icon">
+                            <i class="fa-solid fa-route"></i>
+                        </div>
+
+                        <div class="choose-info">
+
+                            <strong>
+                                رحلة جديدة
+                            </strong>
+
+                            <span>
+                                مجموعة مهام تُتابع خلال فترة
+                            </span>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-left"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- ADD TASK MODAL -->
+        <!-- ================================================= -->
+
+        <div
+            class="modal"
+            id="taskModal"
+            aria-hidden="true">
+
+            <div
+                class="modal-overlay"
+                data-close-modal="taskModal">
+            </div>
+
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <div>
+
+                        <span class="eyebrow" id="taskModalEyebrow">
+                            مهمة جديدة
+                        </span>
+
+                        <h2 id="taskModalTitle">
+                            إضافة مهمة
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        class="modal-close"
+                        type="button"
+                        data-close-modal="taskModal">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+                </div>
+
+
+                <form
+                    class="form"
+                    id="taskForm">
+
+
+                    <label class="form-field">
+
+                        <span>
+                            اسم المهمة
+                        </span>
+
+                        <input
+                            id="taskNameInput"
+                            type="text"
+                            name="taskName"
+                            placeholder="اكتب اسم المهمة"
+                            maxlength="100"
+                            required>
+
+                    </label>
+
+
+                    <label class="form-field">
+
+                        <span>
+                            التصنيف
+                        </span>
+
+                        <select
+                            id="taskClassificationInput"
+                            name="classification">
+
+                            <option value="normal">
+                                عادية
+                            </option>
+
+                            <option value="priority">
+                                أولوية
+                            </option>
+
+                            <option value="special">
+                                خاصة
+                            </option>
+
+                        </select>
+
+                    </label>
+
+
+                    <label class="form-field">
+
+                        <span>
+                            الزمن
+                            <small>
+                                بالأيام (اختياري - حد أقصى 30)
+                            </small>
+                        </span>
+
+                        <input
+                            id="taskTimeInput"
+                            type="number"
+                            name="completionTime"
+                            min="1"
+                            max="30"
+                            placeholder="بالأيام">
+
+                    </label>
+
+
+                    <button
+                        class="primary-button full"
+                        type="submit"
+                        id="taskSubmitButton">
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        إضافة المهمة
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- ADD JOURNEY MODAL -->
+        <!-- ================================================= -->
+
+        <div
+            class="modal"
+            id="journeyModal"
+            aria-hidden="true">
+
+            <div
+                class="modal-overlay"
+                data-close-modal="journeyModal">
+            </div>
+
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <div>
+
+                        <span class="eyebrow" id="journeyModalEyebrow">
+                            رحلة جديدة
+                        </span>
+
+                        <h2 id="journeyModalTitle">
+                            إضافة رحلة
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        class="modal-close"
+                        type="button"
+                        data-close-modal="journeyModal">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+                </div>
+
+
+                <form
+                    class="form"
+                    id="journeyForm">
+
+
+                    <label class="form-field">
+
+                        <span>
+                            اسم الرحلة
+                        </span>
+
+                        <input
+                            id="journeyNameInput"
+                            type="text"
+                            name="journeyName"
+                            placeholder="مثلاً: رحلة النضج"
+                            maxlength="100"
+                            required>
+
+                    </label>
+
+
+                    <label class="form-field">
+
+                        <span>
+                            المدة
+                            <small>
+                                باليوم - الحد الأدنى 30 يوم
+                            </small>
+                        </span>
+
+                        <input
+                            id="journeyTimeInput"
+                            type="number"
+                            name="journeyTime"
+                            min="30"
+                            placeholder="مثلاً: 90"
+                            required>
+
+                    </label>
+
+
+                    <button
+                        class="primary-button full"
+                        type="submit"
+                        id="journeySubmitButton">
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        إضافة الرحلة
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- ADD JOURNEY TASK MODAL -->
+        <!-- ================================================= -->
+
+        <div
+            class="modal"
+            id="journeyTaskModal"
+            aria-hidden="true">
+
+            <div
+                class="modal-overlay"
+                data-close-modal="journeyTaskModal">
+            </div>
+
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            مهمة رحلة
+                        </span>
+
+                        <h2>
+                            إضافة مهمة للرحلة
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        class="modal-close"
+                        type="button"
+                        data-close-modal="journeyTaskModal">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+                </div>
+
+
+                <form
+                    class="form"
+                    id="journeyTaskForm">
+
+
+                    <label class="form-field">
+
+                        <span>
+                            اسم المهمة
+                        </span>
+
+                        <input
+                            id="journeyTaskNameInput"
+                            type="text"
+                            name="taskName"
+                            placeholder="مثلاً: قراءة 5 صفحات"
+                            maxlength="100"
+                            required>
+
+                    </label>
+
+
+                    <label class="form-field">
+
+                        <span>
+                            التصنيف
+                        </span>
+
+                        <select
+                            id="journeyTaskClassificationInput"
+                            name="classification">
+
+                            <option value="normal">
+                                عادية
+                            </option>
+
+                            <option value="priority">
+                                أولوية
+                            </option>
+
+                            <option value="special">
+                                خاصة
+                            </option>
+
+                        </select>
+
+                    </label>
+
+
+                    <label class="form-field">
+
+                        <span>
+                            الزمن
+                            <small>
+                                بالأيام (اختياري - حد أقصى 30)
+                            </small>
+                        </span>
+
+                        <input
+                            id="journeyTaskTimeInput"
+                            type="number"
+                            name="completionTime"
+                            min="1"
+                            max="30"
+                            placeholder="بالأيام">
+
+                    </label>
+
+
+                    <button
+                        class="primary-button full"
+                        type="submit">
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        إضافة المهمة
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- ADD EXPENSE MODAL -->
+        <!-- ================================================= -->
+
+        <div
+            class="modal"
+            id="expenseModal"
+            aria-hidden="true">
+
+            <div
+                class="modal-overlay"
+                data-close-modal="expenseModal">
+            </div>
+
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <div>
+
+                        <span class="eyebrow" id="expenseModalEyebrow">
+                            مصروف جديد
+                        </span>
+
+                        <h2 id="expenseModalTitle">
+                            إضافة مصروف
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        class="modal-close"
+                        type="button"
+                        data-close-modal="expenseModal">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+                </div>
+
+
+                <form
+                    class="form"
+                    id="expenseForm">
+
+
+                    <label class="form-field">
+
+                        <span>
+                            نوع المصروف
+                        </span>
+
+                        <select
+                            id="expenseNameInput"
+                            name="expenseName"
+                            required>
+
+                            <option value="">
+                                اختر التصنيف
+                            </option>
+
+                            <option value="food">
+                                الطعام
+                            </option>
+
+                            <option value="coffee">
+                                القهوة
+                            </option>
+
+                            <option value="tea">
+                                الشاي
+                            </option>
+
+                            <option value="transport">
+                                المواصلات
+                            </option>
+
+                            <option value="internet">
+                                الإنترنت
+                            </option>
+
+                            <option value="custom">
+                                أخرى
+                            </option>
+
+                        </select>
+
+                    </label>
+
+
+                    <label
+                        class="form-field hidden"
+                        id="customExpenseField">
+
+                        <span>
+                            اسم المصروف
+                        </span>
+
+                        <input
+                            id="customExpenseInput"
+                            type="text"
+                            name="customExpense"
+                            placeholder="اكتب اسم المصروف"
+                            maxlength="100">
+
+                    </label>
+
+
+                    <label class="form-field">
+
+                        <span>
+                            المبلغ
+                        </span>
+
+
+                        <div class="amount-input">
+
+                            <input
+                                id="expenseAmountInput"
+                                type="number"
+                                name="amount"
+                                min="1"
+                                step="1"
+                                placeholder="0"
+                                required>
+
+
+                            <span>
+                                جنيه
+                            </span>
+
+                        </div>
+
+                    </label>
+
+
+                    <button
+                        class="primary-button full"
+                        type="submit"
+                        id="expenseSubmitButton">
+
+                        <i class="fa-solid fa-check"></i>
+
+                        حفظ المصروف
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- ABOUT MODAL -->
+        <!-- ================================================= -->
+
+        <div
+            class="modal"
+            id="aboutModal"
+            aria-hidden="true">
+
+            <div
+                class="modal-overlay"
+                data-close-modal="aboutModal">
+            </div>
+
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            تعرف على تطور
+                        </span>
+
+                        <h2>
+                            عن تطور
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        class="modal-close"
+                        type="button"
+                        data-close-modal="aboutModal">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+                </div>
+
+
+                <div class="about-content">
+
+                    <section class="about-section">
+
+                        <div class="about-icon">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+
+                        <h3>
+                            إيه هو تطور؟
+                        </h3>
+
+                        <p>
+                            تطور هو تطبيقك الشخصي لإدارة رحلة النمو والتطور.
+                            يجمع بين تنظيم المهام اليومية، ومتابعة المصروفات،
+                            وإدارة رحلات التطور الطويلة — كل ده في مكان واحد،
+                            بتصميم بسيط ومريح.
+                        </p>
+
+                    </section>
+
+
+                    <section class="about-section">
+
+                        <div class="about-icon">
+                            <i class="fa-solid fa-arrow-trend-up"></i>
+                        </div>
+
+                        <h3>
+                            ليه اسمه تطور؟
+                        </h3>
+
+                        <p>
+                            لأن التطبيق ده مش مجرد أداة، ده رفيقك في رحلة
+                            التغيير. من عواطف الطفولة إلى الرشد ونمو العقل،
+                            بنساعدك تبني عاداتك وتتابع تقدمك يوم بعد يوم.
+                        </p>
+
+                    </section>
+
+
+                    <section class="about-section">
+
+                        <div class="about-icon">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+
+                        <h3>
+                            المهام العادية
+                        </h3>
+
+                        <p>
+                            مهام يومية أو قصيرة المدى، بمدة أقصاها 30 يوم.
+                            تقدر تضيفها، تعدلها، تحذفها، وتعلّم عليها لما تخلص.
+                            التطبيق يحسبلك نسبة الإنجاز بشكل تلقائي.
+                        </p>
+
+                    </section>
+
+
+                    <section class="about-section">
+
+                        <div class="about-icon">
+                            <i class="fa-solid fa-route"></i>
+                        </div>
+
+                        <h3>
+                            الرحلات
+                        </h3>
+
+                        <p>
+                            مجموعة مهام مترابطة تُتابع خلال فترة (30 يوم على الأقل).
+                            الرحلة تبدأ فاضية، وإنت تضيف مهامك واحدة واحدة.
+                            نهاية كل شهر، تقدر تصدّر تقرير كامل.
+                        </p>
+
+                    </section>
+
+
+                    <section class="about-section">
+
+                        <div class="about-icon">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+
+                        <h3>
+                            المصروفات
+                        </h3>
+
+                        <p>
+                            سجّل مصروفاتك اليومية بسهولة، وتابع إجمالي اليوم،
+                            الأسبوع، والشهر. ملاحظة: اليوم يبدأ من 6 صباحاً
+                            وحتى 6 صباحاً من اليوم التالي.
+                        </p>
+
+                    </section>
+
+
+                    <section class="about-section">
+
+                        <div class="about-icon">
+                            <i class="fa-solid fa-file-excel"></i>
+                        </div>
+
+                        <h3>
+                            تقارير Excel
+                        </h3>
+
+                        <p>
+                            صدّر مصروفاتك أو تقرير الرحلة الشهري بصيغة Excel،
+                            عشان تقدر تفتحهم في أي مكان.
+                        </p>
+
+                    </section>
+
+
+                    <section class="about-section tip">
+
+                        <div class="about-icon">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+
+                        <h3>
+                            نصيحة
+                        </h3>
+
+                        <p>
+                            ابدأ صغير، والتزم يوم بيوم. التطور الحقيقي
+                            ما بيجي من قفزات كبيرة، بيجي من خطوات صغيرة
+                            منتظمة.
+                        </p>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- REPORT MODAL (تقرير الرحلة الشهري) -->
+        <!-- ================================================= -->
+
+        <div
+            class="modal"
+            id="reportModal"
+            aria-hidden="true">
+
+            <div
+                class="modal-overlay"
+                data-close-modal="reportModal">
+            </div>
+
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <div>
+
+                        <span class="eyebrow" id="reportModalEyebrow">
+                            تقرير شهري
+                        </span>
+
+                        <h2 id="reportModalTitle">
+                            تقرير الرحلة
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        class="modal-close"
+                        type="button"
+                        data-close-modal="reportModal">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+                </div>
+
+
+                <div class="report-content" id="reportContent">
+                    <!-- يتولّد ديناميكياً -->
+                </div>
+
+
+                <div class="report-actions">
+
+                    <button
+                        class="primary-button full"
+                        id="exportReportButton"
+                        type="button">
+
+                        <i class="fa-solid fa-file-excel"></i>
+
+                        تصدير Excel
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- OLD REPORTS MODAL (التقارير السابقة) -->
+        <!-- ================================================= -->
+
+        <div
+            class="modal"
+            id="oldReportsModal"
+            aria-hidden="true">
+
+            <div
+                class="modal-overlay"
+                data-close-modal="oldReportsModal">
+            </div>
+
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            الأرشيف
+                        </span>
+
+                        <h2>
+                            التقارير السابقة
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        class="modal-close"
+                        type="button"
+                        data-close-modal="oldReportsModal">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+                </div>
+
+
+                <div class="old-reports-list" id="oldReportsList">
+                    <!-- يتولّد ديناميكياً -->
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- MONTHLY REPORT NOTIFICATION -->
+        <!-- ================================================= -->
+
+        <div
+            class="modal"
+            id="monthlyReportNotificationModal"
+            aria-hidden="true">
+
+            <div
+                class="modal-overlay"
+                data-close-modal="monthlyReportNotificationModal">
+            </div>
+
+
+            <div class="modal-content small">
+
+                <div class="notification-content">
+
+                    <div class="notification-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+
+                    <h2>
+                        🎉 خلص شهر من رحلتك!
+                    </h2>
+
+                    <p>
+                        تقرير الشهر جاهز. يلا نشوف تطورك خلال الشهر ده
+                        وقارنه بالشهر اللي فات.
+                    </p>
+
+
+                    <div class="notification-actions">
+
+                        <button
+                            class="primary-button full"
+                            id="viewReportButton"
+                            type="button">
+
+                            <i class="fa-solid fa-eye"></i>
+
+                            شوف التقرير
+
+                        </button>
+
+
+                        <button
+                            class="secondary-button full"
+                            id="dismissReportButton"
+                            type="button">
+
+                            بعدين
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- OPTIONS MENU -->
+        <!-- ================================================= -->
+
+        <div
+            class="options-menu"
+            id="optionsMenu"
+            aria-hidden="true">
+
+            <button
+                class="options-item"
+                data-option="edit"
+                type="button">
+
+                <i class="fa-solid fa-pen"></i>
+
+                <span>
+                    تعديل
+                </span>
+
+            </button>
+
+
+            <button
+                class="options-item"
+                data-option="add-journey-task"
+                type="button"
+                hidden>
+
+                <i class="fa-solid fa-plus"></i>
+
+                <span>
+                    إضافة مهمة
+                </span>
+
+            </button>
+
+
+            <button
+                class="options-item"
+                data-option="complete"
+                type="button">
+
+                <i class="fa-solid fa-check"></i>
+
+                <span>
+                    إكمال
+                </span>
+
+            </button>
+
+
+            <button
+                class="options-item danger"
+                data-option="delete"
+                type="button">
+
+                <i class="fa-solid fa-trash"></i>
+
+                <span>
+                    حذف
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- TOAST -->
+        <!-- ================================================= -->
+
+        <div
+            class="toast"
+            id="toast"
+            role="status">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <span id="toastMessage"></span>
+
+        </div>
+
+    </div>
+
+
+    <!-- UI / DOM -->
+    <script
+        type="module"
+        src="../Js/apps.js">
+    </script>
+
+</body>
+
+</html>
